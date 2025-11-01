@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Sujay Hazra - Portfolio Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Global Theme (from Contact Page) ===== */
+    body {
+        font-family: "Poppins", "Segoe UI", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: radial-gradient(circle at top left, rgba(255,153,51,0.25), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(19,136,8,0.25), transparent 40%),
+                        linear-gradient(135deg, #fff 40%, #ffffff 60%);
+        background-attachment: fixed;
+        min-height: 100vh;
+        color: #222;
+    }
+
+    /* Navbar */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255,255,255,0.25);
+        backdrop-filter: blur(10px);
+        padding: 15px 50px;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        border-bottom: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #222;
+    }
+
+    .logo span {
+        color: #138808;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #333;
+        margin: 0 15px;
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+        color: #ff6600;
+    }
+
+        /* ===== SOCIAL BAR ===== */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .social-bar a {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-bar a:hover {
+            background: linear-gradient(135deg, #ff9933, #128807);
+            color: white;
+            transform: scale(1.1);
+        }
+
+
+    /* ===== Dashboard Content ===== */
+    .content { 
+        padding: 80px 20px; 
+        display: flex; 
+        justify-content: center; 
+    }
+
+    .dashboard { 
+        max-width: 1100px; 
+        width: 100%; 
+        display: grid; 
+        gap: 25px; 
+    }
+
+    .glass {
+        background: rgba(255,255,255,0.2);
+        backdrop-filter: blur(15px);
+        border-radius: 20px;
+        padding: 30px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        border-image: linear-gradient(45deg, #ff9933, #ffffff, #138808) 1;
+        transition: 0.4s ease;
+    }
+
+    .glass:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Profile */
+    .profile-card { text-align: center; }
+    .profile-photo {
+        width: 140px; height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+        border: 3px solid #138808;
+    }
+
+    .name { font-size: 1.8rem; margin-bottom: 8px; color: #004080; }
+    .title { color: #333; font-weight: 500; }
+
+    .contact-info div { margin: 6px 0; color: #333; }
+
+    .badges {
+        margin-top: 15px;
+        display: flex; 
+        flex-wrap: wrap;
+        justify-content: center; 
+        gap: 10px;
+    }
+
+    .badges span {
+        background: linear-gradient(90deg, #ff9933, #138808);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Summary */
+    .summary h2 {
+        color: #004080;
+        margin-bottom: 10px;
+    }
+
+    .summary p {
+        line-height: 1.6; 
+        color: #333;
+    }
+
+    /* Quick Links */
+    .quick-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 25px;
+    }
+
+    .quick-links .card {
+        text-align: center;
+        padding: 25px 15px;
+        transition: all 0.4s ease;
+    }
+
+    .quick-links .card i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+        color: #138808;
+    }
+
+    .quick-links .card h3 {
+        color: #004080;
+    }
+
+    .quick-links .card:hover {
+        transform: translateY(-8px);
+        background: rgba(255,255,255,0.25);
+    }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .footer-copy {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+    footer a { color: #004080; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+
+<body>
+  <!-- Floating Social Bar -->
+  <div class="social-bar">
+    <a href="mailto:hazrassujay@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+    <a href="tel:+918795572515" title="Call"><i class="fas fa-phone"></i></a>
+    <a href="https://linkedin.com/in/sujayhazra" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/hazrassujay" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Sujay <span>Hazra</span></div>
+    <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="skills.html">Skills</a>
+        <a href="experience.html">Experience</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Dashboard -->
+  <main class="content">
+    <section class="dashboard">
+      <!-- Profile -->
+      <div class="profile-card glass">
+        <img src="images/profile.jpg" alt="Sujay Hazra" class="profile-photo" />
+        <h1 class="name">Sujay Hazra</h1>
+        <p class="title">Software Developer | Automation Engineer | Full Stack Enthusiast</p>
+
+        <div class="contact-info">
+          <div><i class="fas fa-envelope"></i> <a href="mailto:hazrassujay@gmail.com">hazrassujay@gmail.com</a></div>
+          <div><i class="fas fa-phone"></i> <a href="tel:+918795572515">+91 87955 72515</a></div>
+          <div><i class="fas fa-map-marker-alt"></i> Ayodhya, India</div>
+        </div>
+
+        <div class="badges">
+          <span><i class="fas fa-code"></i> C#, ASP.NET</span>
+          <span><i class="fas fa-database"></i> SQL Server</span>
+          <span><i class="fas fa-cogs"></i> PLC Integration</span>
+          <span><i class="fas fa-microchip"></i> Industrial IoT</span>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="summary glass">
+        <h2><i class="fas fa-user-circle"></i> Professional Summary</h2>
+        <p>
+          I’m a dedicated <b>Software Developer</b> and <b>Automation Engineer</b> passionate about bridging
+          <b>Industrial Automation</b> with <b>Software Development</b>.
+        </p>
+        <p>
+          Skilled in building <b>data-driven dashboards</b>, <b>real-time monitoring systems</b>, and
+          <b>secure API architectures</b>, I deliver scalable, production-ready solutions for modern industry.
+        </p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="quick-links">
+        <a href="skills.html" class="card glass">
+          <i class="fas fa-tools"></i>
+          <h3>Skills</h3>
+          <p>Explore my technical stack and key proficiencies.</p>
+        </a>
+        <a href="experience.html" class="card glass">
+          <i class="fas fa-briefcase"></i>
+          <h3>Experience</h3>
+          <p>Learn about my professional journey and contributions.</p>
+        </a>
+        <a href="projects.html" class="card glass">
+          <i class="fas fa-project-diagram"></i>
+          <h3>Projects</h3>
+          <p>See how I build practical and efficient solutions.</p>
+        </a>
+        <a href="contact.html" class="card glass">
+          <i class="fas fa-envelope"></i>
+          <h3>Contact</h3>
+          <p>Let’s connect and discuss your next big idea.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="contact-info">
+        <p><i class="fas fa-envelope"></i> <a href="mailto:hazrassujay@gmail.com">hazrassujay@gmail.com</a></p>
+        <p><i class="fas fa-phone"></i> <a href="tel:+918795572515">+91 87955 72515</a></p>
+        <p><i class="fas fa-map-marker-alt"></i> Ayodhya, India</p>
+    </div>
+    <p class="footer-copy">© 2025 Sujay Hazra | Portfolio Dashboard</p>
+  </footer>
+</body>
+</html>

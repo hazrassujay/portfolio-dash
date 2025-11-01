@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Sujay Hazra - Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== GLOBAL RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", "Segoe UI", sans-serif;
+        }
+
+        body {
+            font-family: "Poppins", "Segoe UI", sans-serif;
+            background: linear-gradient(135deg, rgba(255,153,51,0.25) 0%, rgba(255,255,255,0.9) 50%, rgba(19,136,8,0.25) 100%);
+            min-height: 100vh;
+            color: #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .logo span {
+            color: #128807;
+        }
+
+        .navbar nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s, border-bottom 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .navbar nav a:hover, .navbar nav a.active {
+            color: #ff9933;
+            border-bottom: 2px solid #ff9933;
+        }
+
+        /* ===== SOCIAL BAR ===== */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .social-bar a {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-bar a:hover {
+            background: linear-gradient(135deg, #ff9933, #128807);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        /* ===== EXPERIENCE SECTION ===== */
+        .content {
+            flex: 1;
+        }
+
+        .experience-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #004080;
+        }
+
+        .section-title i {
+            color: #004080;
+            margin-right: 10px;
+        }
+
+        .experience-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .experience-card {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .company-info h2 {
+            font-size: 1.4rem;
+            color: #000;
+        }
+
+        .company-info p {
+            margin: 3px 0;
+            color: #444;
+        }
+
+        .role {
+            font-weight: 600;
+            color: #128807;
+        }
+
+        .period {
+            color: #555;
+            font-style: italic;
+        }
+
+        .skills-pill {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skills-pill span {
+            background: linear-gradient(135deg, #ff9933, #128807);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .experience-details ul {
+            list-style: none;
+            margin-top: 15px;
+            padding-left: 15px;
+        }
+
+        .experience-details li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+            color: #333;
+            position: relative;
+        }
+
+        .experience-details li::before {
+            content: "•";
+            color: #ff9933;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .footer-copy {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar nav a {
+                display: inline-block;
+                margin: 10px;
+            }
+
+            .social-bar {
+                left: auto;
+                right: 15px;
+                flex-direction: row;
+                top: auto;
+                bottom: 15px;
+                transform: none;
+            }
+
+            .experience-section {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Social Bar -->
+    <div class="social-bar">
+        <a href="mailto:hazrassujay@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+918795572515" title="Call"><i class="fas fa-phone"></i></a>
+        <a href="https://linkedin.com/in/sujayhazra" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/hazrassujay" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">Sujay <span>Hazra</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="experience.html" class="active">Experience</a>
+            <a href="projects.html">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Experience Section -->
+    <main class="content">
+        <section class="experience-section">
+            <h1 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h1>
+
+            <div class="experience-container">
+                <div class="experience-card">
+                    <div class="company-info">
+                        <h2>S. I. Energy Ventures Pvt. Ltd.</h2>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> Delhi, India</p>
+                        <p class="role">Software Developer | Automation Engineer</p>
+                        <p class="period">Jul 2022 – Present</p>
+                    </div>
+
+                    <div class="skills-pill">
+                        <span><i class="fas fa-microchip"></i> PLC Programming</span>
+                        <span><i class="fas fa-desktop"></i> FT Optix HMI</span>
+                        <span><i class="fas fa-chart-line"></i> Dashboard Development</span>
+                        <span><i class="fas fa-database"></i> SQL & Web Reporting</span>
+                        <span><i class="fab fa-python"></i> Python Automation</span>
+                    </div>
+
+                    <div class="experience-details">
+                        <ul>
+                            <li>Developed full C# and SQL-based automation dashboards for production and energy monitoring.</li>
+                            <li>Designed FactoryTalk Optix HMI interfaces for multiple MCCs with live PLC data visualization.</li>
+                            <li>Built ASP.NET Web Forms dashboards integrating stored procedures ([EnergyData_1], [EnergyData_2], [EnergyData_3]).</li>
+                            <li>Automated data collection from CompactLogix PLCs into SQL Server via custom Windows Services.</li>
+                            <li>Developed Python utilities to extract, process, and sync data between PLCs, SQL, and JSON files.</li>
+                            <li>Created Windows Services for secure API posting with encryption and token-based authentication.</li>
+                            <li>Integrated SSRS reports and analytics dashboards for management insights.</li>
+                            <li>Engineered real-time OEE dashboards and energy performance analytics for multiple plants.</li>
+                            <li>Implemented JSON-based fail-safe backup system for live service data restoration.</li>
+                            <li>Optimized PLC logic and interlocks for advanced process and energy management systems.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> <a href="mailto:hazrassujay@gmail.com">hazrassujay@gmail.com</a></p>
+            <p><i class="fas fa-phone"></i> <a href="tel:+918795572515">+91 87955 72515</a></p>
+            <p><i class="fas fa-map-marker-alt"></i> Ayodhya, India</p>
+        </div>
+        <p class="footer-copy">© 2025 Sujay Hazra | Portfolio Dashboard</p>
+    </footer>
+
+    <script>
+        // Fade animation when scrolling into view
+        const cards = document.querySelectorAll(".experience-card");
+        window.addEventListener("scroll", () => {
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0)";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

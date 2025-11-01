@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Sujay Hazra - Projects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== Global Styles ===== */
+        body {
+            font-family: "Poppins", "Segoe UI", sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at top left, rgba(255,153,51,0.25), transparent 40%),
+                        radial-gradient(circle at bottom right, rgba(19,136,8,0.25), transparent 40%),
+                        linear-gradient(135deg, #fff 40%, #ffffff 60%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: #222;
+        }
+
+        /* ===== SOCIAL BAR ===== */
+        .social-bar {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .social-bar a {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-bar a:hover {
+            background: linear-gradient(135deg, #ff9933, #128807);
+            color: white;
+            transform: scale(1.1);
+        }
+
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            padding: 15px 50px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .logo span {
+            color: #138808;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: #ff6600;
+        }
+
+        /* ===== Projects Section ===== */
+        .content {
+            padding: 20px 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #004080;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .project-card {
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            border-image: linear-gradient(45deg, #ff9933, #ffffff, #138808) 1;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image {
+            position: relative;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .image-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            transition: 0.3s;
+            cursor: pointer;
+            flex-direction: column;
+            color: white;
+        }
+
+        .project-image:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .image-overlay i {
+            font-size: 30px;
+            margin-bottom: 5px;
+            color: #ff9933;
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #004080;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: #070707;
+            margin-bottom: 10px;
+        }
+
+        .tech-used {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .pill {
+            background: linear-gradient(90deg, #ff9933, #138808);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #fff;
+        }
+
+        /* ===== Modal Styles ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(15px);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            animation: pop 0.4s ease;
+            border: 2px solid #fff;
+            color: #000;
+            max-width: 600px;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .modal img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal h3 {
+            color: #000;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: #000;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .modal button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background: linear-gradient(90deg, #c31432, #240b36);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .modal button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-top: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .footer-copy {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            header.navbar {
+                flex-direction: column;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Social Bar -->
+    <div class="social-bar">
+        <a href="mailto:hazrassujay@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="tel:+918795572515" title="Call"><i class="fas fa-phone"></i></a>
+        <a href="https://linkedin.com/in/sujayhazra" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/hazrassujay" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="navbar">
+        <div class="logo">Sujay <span>Hazra</span></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="experience.html">Experience</a>
+            <a href="projects.html" class="active">Projects</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Projects Section -->
+    <main class="content">
+        <section class="projects-section">
+            <h2 class="section-title"><i class="fas fa-project-diagram"></i> Projects</h2>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will auto-load here -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <img id="modalImg" src="" alt="">
+            <h3 id="modalTitle"></h3>
+            <p id="modalDesc"></p>
+            <div id="modalTech"></div>
+            <button id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> <a href="mailto:hazrassujay@gmail.com">hazrassujay@gmail.com</a></p>
+            <p><i class="fas fa-phone"></i> <a href="tel:+918795572515">+91 87955 72515</a></p>
+            <p><i class="fas fa-map-marker-alt"></i> Ayodhya, India</p>
+        </div>
+        <p class="footer-copy">© 2025 Sujay Hazra | Portfolio Dashboard</p>
+    </footer>
+
+    <!-- ===== JavaScript for Modal Functionality ===== -->
+    <script>
+    const projects = [
+    {
+        title: "Energy Dashboard",
+        icon: "fas fa-bolt",
+        img: "images/energy-dashboard.PNG",
+        desc: "Interactive industrial dashboard showing real-time power, gas, and fuel metrics using SQL procedures and C# backend logic. Includes live trend charts, daily & monthly reports, and 7:01–7:00 AM shift logic.",
+        tech: ["C#", "SQL", "JavaScript", "ASP.NET"]
+    },
+    {
+        title: "PLC Automation",
+        icon: "fas fa-cogs",
+        img: "images/plc-automation.webp",
+        desc: "Automated Allen Bradley PLC control systems for rotary ovens, extruders, and production lines with fault diagnostics and performance monitoring.",
+        tech: ["RSLogix 500", "CCW", "FT Optix", "PLC Ladder Logic"]
+    },
+    {
+        title: "Data Analytics Tool",
+        icon: "fas fa-chart-line",
+        img: "images/data-analytics.PNG",
+        desc: "Python-based tool to analyze SQL production data, generate Excel reports, visualize with Matplotlib & Pandas, and export JSON for offline use.",
+        tech: ["Python", "Pandas", "Matplotlib", "SQL"]
+    },
+    {
+        title: "Web Reporting Dashboard",
+        icon: "fas fa-laptop-code",
+        img: "images/web-reporting.PNG",
+        desc: "Responsive ASP.NET reporting platform with chart visualizations, table exports, and SQL-based analytics for energy and production metrics.",
+        tech: ["C#", "ASP.NET", "SQL", "Bootstrap"]
+    },
+    {
+        title: "OEE Monitoring Dashboard",
+        icon: "fas fa-tachometer-alt",
+        img: "images/oee-dashboard.png",
+        desc: "OEE dashboard displaying uptime, performance, and quality metrics derived from PLC data in real time.",
+        tech: ["C#", "SQL", "JavaScript", "HMI Integration"]
+    },
+    {
+        title: "FT Optix HMI Project",
+        icon: "fas fa-desktop",
+        img: "images/ft-optix.PNG",
+        desc: "Developed advanced FT Optix HMI dashboards with live equipment status, alarms, and trends using OPC UA connectivity.",
+        tech: ["FT Optix", "C#", "OPC UA", "PLC Integration"]
+    },
+    {
+        title: "RSLogix Logic Development",
+        icon: "fas fa-microchip",
+        img: "images/rslogix.png",
+        desc: "Developed and tested automation logic for motors and process systems ensuring interlocks, safety, and performance efficiency.",
+        tech: ["RSLogix 500", "PLC", "CCW", "HMI"]
+    },
+    {
+        title: "Skills Dashboard",
+        icon: "fas fa-brain",
+        img: "images/skills-dashboard.jpg",
+        desc: "Animated, interactive skills dashboard showing professional competencies, growth charts, and proficiency levels using HTML, CSS, JS animations.",
+        tech: ["HTML", "CSS", "JavaScript"]
+    },
+    {
+        title: "Face Recognition",
+        icon: "fas fa-user",
+        img: "images/face-recognition.jpg",
+        desc: "C# WinForms application using EmguCV for face detection and recognition via LBPH algorithm. Includes face training, labeling, and real-time recognition.",
+        tech: ["C#", "EmguCV", "LBPH", "Windows Forms"]
+    },
+    {
+        title: "AutoMail Scheduler",
+        icon: "fas fa-envelope",
+        img: "images/automail.PNG",
+        desc: "Windows Service that automatically sends scheduled reports and logs via email using SQL Server data and secure app credentials.",
+        tech: ["C#", "SQL Server", "Windows Service"]
+    },
+    {
+        title: "Project Tracker",
+        icon: "fas fa-tasks",
+        img: "images/project-tracker.webp",
+        desc: "Web-based project management system for tracking tasks, team updates, and milestones. Integrated dashboard analytics using SQL backend.",
+        tech: ["ASP.NET", "SQL", "JavaScript", "Bootstrap"]
+    },
+    {
+        title: "ControlLogix Data Acquisition System",
+        icon: "fas fa-microchip",
+        desc: "Developed a data acquisition layer using Rockwell ControlLogix PLCs to collect process data via Ethernet/IP and store in SQL Server for analysis.",
+        img: "images/controllogix-daq.jpg",
+        tech: ["ControlLogix", "EtherNet/IP", "C#", "SQL Server"]
+    },
+    {
+        title: "CompactLogix Production Tracker",
+        icon: "fas fa-industry",
+        desc: "Designed and implemented a CompactLogix-based system to log real-time production counts, downtimes, and alarms to SQL, integrated with SSRS reports.",
+        img: "images/compactlogix-tracker.jpg",
+        tech: ["CompactLogix", "RSLogix 5000", "SQL Server", "SSRS"]
+    },
+    {
+        title: "FactoryTalk Historian Reporting Interface",
+        icon: "fas fa-database",
+        desc: "Built a web reporting interface connected to FactoryTalk Historian SE for historical trend plotting, KPI analysis, and downtime insights.",
+        img: "images/factorytalk-historian.jpg",
+        tech: ["FactoryTalk Historian", "ASP.NET", "SQL", "Highcharts"]
+    },
+    {
+        title: "Batch Recipe Control System",
+        icon: "fas fa-flask",
+        desc: "Implemented batch recipe control logic in ControlLogix PLC with C# application for recipe download, execution tracking, and automatic report generation.",
+        img: "images/batch-control.png",
+        tech: ["ControlLogix", "RSLogix 5000", "C#", "Reporting"]
+    },
+    {
+        title: "Energy Monitoring and SSRS Reporting Suite",
+        icon: "fas fa-bolt",
+        desc: "Developed a centralized energy monitoring and reporting system integrating CompactLogix PLCs, SQL stored procedures, and SSRS daily reports.",
+        img: "images/energy-reporting.jpg",
+        tech: ["CompactLogix", "SQL Server", "SSRS", "C#"]
+    },
+    {
+        title: "PLC to API Communication Gateway",
+        icon: "fas fa-plug",
+        desc: "Created a Windows Service to fetch production data from CompactLogix PLCs via OPC UA and push encrypted data to cloud APIs for analytics.",
+        img: "images/plc-api.jpg",
+        tech: ["C#", "OPC-UA", "CompactLogix", "REST API"]
+    },
+    {
+        title: "Maintenance Alarm Dashboard",
+        icon: "fas fa-tools",
+        desc: "Designed a maintenance dashboard that reads PLC alarms from SQL logs and generates categorized reports with visual summaries and email alerts.",
+        img: "images/maintenance-dashboard.jpg",
+        tech: ["SQL Server", "SSRS", "ASP.NET", "PLC Integration"]
+    },
+    {
+        title: "OEE Analysis and Trend Dashboard",
+        icon: "fas fa-chart-line",
+        desc: "Built a real-time OEE dashboard integrating CompactLogix PLC tags with SQL-based stored procedures and web visualization using Highcharts.",
+        img: "images/oee-trend.jpg",
+        tech: ["CompactLogix", "SQL Server", "Highcharts", "C#"]
+    },
+    {
+        title: "Factory Data Sync and Auto Report Scheduler",
+        icon: "fas fa-sync-alt",
+        desc: "Automated data synchronization from multiple CompactLogix PLCs to SQL and scheduled SSRS report generation with email delivery.",
+        img: "images/auto-report.jpg",
+        tech: ["C#", "SQL Server Agent", "SSRS", "PLC"]
+    },
+    {
+        title: "Tank Level Monitoring and Reporting System",
+        icon: "fas fa-oil-can",
+        desc: "Developed a system to collect tank level data from CompactLogix analog inputs, calculate volumes, and generate auto daily reports via SSRS.",
+        img: "images/tank-reporting.jpg",
+        tech: ["CompactLogix", "RSLogix 5000", "SQL", "SSRS"]
+    }
+];
+
+const grid = document.getElementById("projectsGrid");
+const modal = document.getElementById("projectModal");
+const modalImg = document.getElementById("modalImg");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalTech = document.getElementById("modalTech");
+const closeModal = document.getElementById("closeModal");
+
+// Utility: Check if image exists
+function checkImage(url, callback) {
+    const img = new Image();
+    img.onload = () => callback(true);
+    img.onerror = () => callback(false);
+    img.src = url;
+}
+
+// Load project cards dynamically
+projects.forEach((p, i) => {
+    const card = document.createElement("div");
+    card.classList.add("project-card");
+
+    checkImage(p.img, (exists) => {
+        const imageContent = exists
+            ? `<img src="${p.img}" alt="${p.title}">`
+            : `<div class="icon-placeholder"><i class="${p.icon}"></i></div>`;
+
+        card.innerHTML = `
+            <div class="project-image" data-index="${i}">
+                ${imageContent}
+                <div class="image-overlay"><i class="fas fa-eye"></i><span>View Details</span></div>
+            </div>
+            <div class="project-content">
+                <div class="project-title"><i class="${p.icon}"></i> ${p.title}</div>
+                <div class="project-desc">${p.desc}</div>
+                <div class="tech-used">${p.tech.map(t => `<span class='pill'>${t}</span>`).join('')}</div>
+            </div>`;
+        grid.appendChild(card);
+    });
+});
+
+    // Show modal
+    grid.addEventListener("click", (e) => {
+        const overlay = e.target.closest(".project-image");
+        if (!overlay) return;
+
+        const idx = overlay.dataset.index;
+        const proj = projects[idx];
+
+        modalImg.src = proj.img;
+        modalTitle.innerHTML = `<i class="fas ${proj.icon}"></i> ${proj.title}`;
+        modalDesc.textContent = proj.desc;
+        modalTech.innerHTML = proj.tech.map(t => `<span class='pill'>${t}</span>`).join(' ');
+        modal.style.display = "flex";
+    });
+
+    // Close modal when clicking close icon or outside
+    closeModal.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", (e) => {
+        if (e.target === modal) modal.style.display = "none";
+    });
+</script>
+
+
+</body>
+</html>
